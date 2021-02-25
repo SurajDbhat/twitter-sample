@@ -1,0 +1,35 @@
+<br>
+<br>
+  <%= link_to 'All Posts', posts_path%> 
+<div>
+  <h1><%= @userinfo.email %></h1>
+  <h2> have tweeted <%= @usercount %> time(s).</h2>
+</div>
+ 
+<div>
+  <% @posts.reverse.each do |post| %>
+    <p>
+      <tr>
+        <div class="post">
+          <h3 class="black"><td><%= link_to post.user.email, user_profile_path(post.user) %></td></h3>
+          <h2><td><%= post.body %></td></h2>
+          <h3><td><%= post.updated_at %></td></h3>
+          <% if current_user.liked? post %>
+            <%= link_to dislike_post_path(post.id), method: :put do %>
+              <%= image_tag("like.png", :alt => "Like", height: 18, width: 20) %>
+              <%= post.get_likes.size %>
+            <% end %>
+          <% else %>
+            <%= link_to like_post_path(post), method: :put do %>
+              <%= image_tag("dislike.png", :alt => "Like", height: 18, width: 20) %>
+              <%= post.get_likes.size %>
+            <% end %>
+          <% end %>
+          <% if post.draft? %>
+            <%= link_to "Edit", edit_post_path(post.id), class: "twitter-button"%>
+          <%end%>
+          <%= link_to "Delete", post_path(post.id), confirm: "Are you sure?", method: :delete, class: "twitter-button"%>
+        </div>
+      </tr>
+  <% end %>
+</div>

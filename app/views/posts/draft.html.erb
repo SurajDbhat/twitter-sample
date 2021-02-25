@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Draft Posts</h1>
+<br>
+<%= link_to 'Published Posts', posts_path %>
+<div>
+  <% @draft_posts.each do |post| %>
+    <tr>
+      <div class="post">
+        <h1><td><%= link_to post.user.email, user_profile_path(post.user) %></td></h1>
+        <h2><td><%= post.body %></td></h2>
+        <% if post.content.attached? %>
+          <% if post.content.representable? %>
+            <td><%= image_tag url_for(post.content), height: 200, width: 200%></td>
+          <%else%>
+            <%= link_to rails_blob_path(post.content, disposition: "attachment") do %>
+              <%= image_tag("file_download.png", alt: "Download file", height: 50, width: 50)%>
+            <% end %>
+          <% end %>
+        <% end %>
+        <h3><td><%= post.created_at %></td></h3>
+        <% if current_user.liked? post %>
+          <%= link_to dislike_post_path(post.id), method: :put do %>
+            <%= image_tag("like.png", :alt => "Like", height: 18, width: 20) %>
+            <%= post.get_likes.size %>
+          <% end %>
+        <% else %>
+          <%= link_to like_post_path(post), method: :put do %>
+            <%= image_tag("dislike.png", :alt => "Like", height: 18, width: 20) %>
+            <%= post.get_likes.size %>
+          <% end %>
+        <% end %>
+          <%= link_to "Publish Post", publish_post_path(post.id), method: :put, class: "twitter-button"%>
+          <%= link_to "Edit", edit_post_path(post.id), class: "twitter-button"%>
+          <%= link_to "Delete", post_path(post.id), confirm: "Are you sure?", method: :delete, class: "twitter-button"%>
+        </span>
+      </div>
+    </tr>
+    <br>
+  <% end %>
+</div>
+</table>
+
+<br>

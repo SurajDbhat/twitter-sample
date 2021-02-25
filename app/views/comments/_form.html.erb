@@ -1,0 +1,17 @@
+<%= form_with model: [ @post, @post.comments.build ] do |form| %>
+  <p>
+    <%= form.label :body%>
+    <br>
+    <%= form.text_field :body, required: true %>
+  </p>
+
+  <p>
+    <%= form.label 'Attachment' %>
+    <br>
+    <%= form.file_field :content %>
+  </p>
+  
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
