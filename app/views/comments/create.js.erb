@@ -1,0 +1,4 @@
+$("div.append").html(' ');
+$("div.append").append("<%=j render(partial: 'comments', locals:{comments: @post.comments}) %>")
+
+$("#comment_body").val(' ');

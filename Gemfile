@@ -4,7 +4,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '2.6.3'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 6.0.3', '>= 6.0.3.2'
+gem 'rails', '~> 5.2.4', '>= 5.2.4.1'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3', '~> 1.4'
 # Use Puma as the app server
@@ -23,6 +23,7 @@ gem 'devise'
 gem 'acts_as_votable'
 gem 'image_processing'
 gem 'bootstrap', '~> 4.4.1'
+gem 'jquery-rails'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
 # Use Active Model has_secure_password

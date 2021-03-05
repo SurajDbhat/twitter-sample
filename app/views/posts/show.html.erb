@@ -42,7 +42,9 @@
 </div>
 <br>
 <h2>Comments</h2>
-<%= render "comments/comments", comments: @post.comments.order(updated_at: :desc) %>
+<div class='append'>
+  <%= render "comments/comments", comments: @post.comments.order(updated_at: :desc) %>
+</div>
 
 <h2>Add a comment:</h2>
 <%= render 'comments/form', post: @post %>

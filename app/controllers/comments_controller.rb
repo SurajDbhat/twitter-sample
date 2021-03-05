@@ -13,9 +13,18 @@ class CommentsController < ApplicationController
     @comment = Comment.new(comment_params)
     @comment.user_id = current_user.id
     @comment.post_id = @post.id
+    # debugger
     if @comment.save
-      flash[:success] = "Your comment has been created"
-      redirect_to post_path(@post)
+      respond_to do |format|
+        format.html{
+          flash[:success] = "Your comment has been created"
+          redirect_to post_path(@post)
+        }
+        format.js{
+          flash[:success] = "Your comment has been created"
+          render 'create.js.erb'
+        }
+      end
     else
       render 'new'
     end
